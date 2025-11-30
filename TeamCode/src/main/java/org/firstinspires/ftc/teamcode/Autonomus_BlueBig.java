@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="Robot: Blue Big", group="Robot")
-public class Autonomus3 extends LinearOpMode {
+public class Autonomus_BlueBig extends LinearOpMode {
     private DcMotor flMotor;
     private DcMotor frMotor;
     private DcMotor blMotor;

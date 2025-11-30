@@ -53,7 +53,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @Disabled
 @TeleOp(name="Concept: Gamepad Edge Detection", group ="Concept")
-public class ConceptGamepadEdgeDetection extends LinearOpMode {
+public class
+ConceptGamepadEdgeDetection extends LinearOpMode {
 
     @Override
     public void runOpMode() {

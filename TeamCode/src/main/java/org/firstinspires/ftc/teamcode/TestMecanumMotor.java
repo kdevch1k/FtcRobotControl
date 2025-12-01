@@ -1,20 +1,38 @@
-// Чисто тестовый класс, на понимание работы мотора
+// Основной класс для управления роботом в TeleOp режиме
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
+
+// import com.qualcomm.robotcore.hardware.DcMotorSimple;
+// import com.qualcomm.robotcore.hardware.Servo;
+// import com.qualcomm.robotcore.util.Range;
 
 
-@TeleOp(name="Main MecanumMotor + Gamepad NoGun")
+@TeleOp(name="Main MercanMotor + Gamepad NoGun")
 public class TestMecanumMotor extends LinearOpMode {
     private DcMotor flMotor;
     private DcMotor frMotor;
     private DcMotor blMotor;
     private DcMotor brMotor;
+
+    // Настройка управления
+    // 0 - левый Y, 1 - левый X, 2 - правый Y, 3 - правый X
+    // Вперед/Назад
+    // По умолчанию: Левый стик Y, стандартно
+    private final int axialAxisID = 0;
+    private final double axialDirection = 1.0;
+
+    // Вбок
+    // По умолчанию: Левый стик X, инверсия по умолчанию
+    private final int lateralAxisID = 1;
+    private final double lateralDirection = -1.0;
+
+    // Поворот
+    // По умолчанию: Правый стик X, инверсия по умолчанию
+    private final int yawAxisID = 3;
+    private final double yawDirection = -1.0;
 
 //    static final double SERVO_START_POS = 0.9;
 //    static final double SERVO_INCREMENT = 0.001;
@@ -25,6 +43,21 @@ public class TestMecanumMotor extends LinearOpMode {
 //    double position = SERVO_START_POS;
 //
 //    private DcMotor motor;
+
+    // Метод, который сопоставляет ID из конфига с фактической осью геймпада
+    private double getGamepadAxis(int axisID) {
+        switch (axisID) {
+            case 0: return gamepad1.left_stick_y;
+            case 1: return gamepad1.left_stick_x;
+            case 2: return gamepad1.right_stick_y;
+            case 3: return gamepad1.right_stick_x;
+            // Триггеры (вдруг понадобятся)
+            // case 4: return gamepad1.left_trigger;
+            // case 5: return gamepad1.right_trigger;
+            default:
+                return 0.0;
+        }
+    }
 
     @Override
     public void runOpMode() {
@@ -62,19 +95,16 @@ public class TestMecanumMotor extends LinearOpMode {
 
         // мотор будет вращаться пока мы не нажмем STOP
         while (opModeIsActive()) {
-            /* Управление с геймпада
-               Левый стик: вверх вних - вперед назад,
-               Влево вправо - влево вправо
-               Правый стик: влево вправо - поворот налево направо
-             */
-            double leftY = gamepad1.left_stick_y;
-            double leftX = -gamepad1.left_stick_x;
-            double rightX = -gamepad1.right_stick_x;
+            // Управление с геймпада
+            double axial = getGamepadAxis(axialAxisID) * axialDirection;
+            double lateral = getGamepadAxis(lateralAxisID) * lateralDirection;
+            double yaw = getGamepadAxis(yawAxisID) * yawDirection;
 
-            double flPower = leftY + leftX + rightX;
-            double frPower = leftY - leftX - rightX;
-            double blPower = leftY - leftX + rightX;
-            double brPower = leftY + leftX - rightX;
+            // Математика Mercan
+            double flPower = axial + lateral + yaw;
+            double frPower = axial - lateral - yaw;
+            double blPower = axial - lateral + yaw;
+            double brPower = axial + lateral - yaw;
 
             double max;
 

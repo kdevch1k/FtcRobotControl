@@ -5,18 +5,18 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="Robot: Red Big", group="Robot")
-public class Autonomus_RedBig extends LinearOpMode {
+@Autonomous(name="RedAllianceAuto", group="Robot")
+public class AutonomusRedBig extends LinearOpMode {
     private DcMotor flMotor;
     private DcMotor frMotor;
     private DcMotor blMotor;
     private DcMotor brMotor;
 
-    private ElapsedTime     runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
 
-    static final double     TURN_SPEED    = 1;
+    static final double TURN_SPEED    = 1;
 
-    static final double     FORWARD_SPEED = 1;
+    static final double FORWARD_SPEED = 1;
 
     @Override
     public void runOpMode() {

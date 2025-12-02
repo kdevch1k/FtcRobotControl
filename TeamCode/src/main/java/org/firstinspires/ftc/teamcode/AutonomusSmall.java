@@ -5,18 +5,17 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="Robot: Blue Big", group="Robot")
-public class Autonomus_BlueBig extends LinearOpMode {
+@Autonomous(name="SmallTriangleAuto")
+public class AutonomusSmall extends LinearOpMode {
     private DcMotor flMotor;
     private DcMotor frMotor;
     private DcMotor blMotor;
     private DcMotor brMotor;
 
-    private ElapsedTime     runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
 
-    static final double     TURN_SPEED    = 1;
 
-    static final double     FORWARD_SPEED = 1;
+    static final double FORWARD_SPEED = 1;
 
     @Override
     public void runOpMode() {
@@ -47,23 +46,6 @@ public class Autonomus_BlueBig extends LinearOpMode {
         frMotor.setPower(FORWARD_SPEED);
         brMotor.setPower(FORWARD_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 3.0)) {
-            telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        flMotor.setPower(-TURN_SPEED);
-        frMotor.setPower(TURN_SPEED);
-        blMotor.setPower(-TURN_SPEED);
-        brMotor.setPower(TURN_SPEED);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.3)) {
-            telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        flMotor.setPower(FORWARD_SPEED);
-        blMotor.setPower(FORWARD_SPEED);
-        frMotor.setPower(FORWARD_SPEED);
-        brMotor.setPower(FORWARD_SPEED);
         while (opModeIsActive() && (runtime.seconds() < 3.0)) {
             telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();

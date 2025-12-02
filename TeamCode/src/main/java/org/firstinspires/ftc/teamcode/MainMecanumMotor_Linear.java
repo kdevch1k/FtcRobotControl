@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 // import com.qualcomm.robotcore.util.Range;
 
 
-@TeleOp(name="Main MercanMotor + Gamepad NoGun")
-public class TestMecanumMotor extends LinearOpMode {
+@TeleOp(name="DriveMecanumTeleOp")
+public class MainMecanumMotor_Linear extends LinearOpMode {
     private DcMotor flMotor;
     private DcMotor frMotor;
     private DcMotor blMotor;
